@@ -8,6 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 
+import java.sql.SQLException;
 import java.util.function.Consumer;
 import modelo.Socio;
 import modelo.Reserva;
@@ -24,7 +25,11 @@ public class DashboardView extends BorderPane {
         TableColumn<Socio, String> c2 = new TableColumn<>("Nombre");
         c2.setCellValueFactory(p -> new javafx.beans.property.SimpleStringProperty(p.getValue().getNombre()));
         tablaSocios.getColumns().addAll(c1, c2);
-        tablaSocios.getItems().addAll(club.getSocios());
+        try {
+            tablaSocios.getItems().addAll(club.getSocios());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         TableView<Pista> tablaPistas = new TableView<>();
         TableColumn<Pista, String> p1 = new TableColumn<>("ID");
@@ -34,7 +39,11 @@ public class DashboardView extends BorderPane {
         TableColumn<Pista, String> p3 = new TableColumn<>("Disponible");
        p3.setCellValueFactory(p -> new javafx.beans.property.SimpleStringProperty(String.valueOf(p.getValue().isDisponible())));
         tablaPistas.getColumns().addAll(p1, p2, p3);
-        tablaPistas.getItems().addAll(club.getPistas());
+        try {
+            tablaPistas.getItems().addAll(club.getPistas());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         TableView<Reserva> tablaReservas = new TableView<>();
         TableColumn<Reserva, String> r1 = new TableColumn<>("ID");
@@ -50,7 +59,11 @@ public class DashboardView extends BorderPane {
         TableColumn<Reserva, String> r6 = new TableColumn<>("Min");
          r6.setCellValueFactory(p -> new javafx.beans.property.SimpleStringProperty(String.valueOf(p.getValue().getDuracionMin())));
         tablaReservas.getColumns().addAll(r1, r2, r3, r4, r5, r6);
-        tablaReservas.getItems().addAll(club.getReservas());
+        try {
+            tablaReservas.getItems().addAll(club.getReservas());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         BorderPane center = new BorderPane();
         center.setTop(new Label("Socios"));
