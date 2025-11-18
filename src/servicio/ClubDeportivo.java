@@ -34,6 +34,25 @@ public class ClubDeportivo {
         return listaSocios;
     }
 
+    public boolean altaSocio(Socio socio) throws SQLException {
+
+        String sql = "INSERT INTO socios\n" +
+                "(id_socio, dni, nombre, apellidos, telefono, email)\n" +
+                "VALUES (?, ?, ?, ?, ?, ?)";
+
+        PreparedStatement pst = conexion.prepareStatement(sql);
+
+        pst.setString(1, socio.getIdSocio());
+        pst.setString(2, socio.getDni());
+        pst.setString(3, socio.getNombre());
+        pst.setString(4, socio.getApellidos());
+        pst.setString(5, socio.getTelefono());
+        pst.setString(6, socio.getEmail());
+
+        pst.executeUpdate();
+        return true;
+    }
+
     public ArrayList<Pista> getPistas() throws SQLException {
 
         ArrayList<Pista> listaPistas = new ArrayList<>();
@@ -52,6 +71,23 @@ public class ClubDeportivo {
         rs.close();
 
         return listaPistas;
+    }
+
+    public boolean altaPista(Pista pista) throws SQLException {
+
+        String sql = "INSERT INTO pistas\n" +
+                "(id_pista, deporte, descripcion, disponible)\n" +
+                "VALUES (?, ?, ?, ?)";
+
+        PreparedStatement pst = conexion.prepareStatement(sql);
+
+        pst.setString(1, pista.getIdPista());
+        pst.setString(2, pista.getDeporte());
+        pst.setString(3, pista.getDescripcion());
+        pst.setBoolean(4, pista.isDisponible());
+
+        pst.executeUpdate();
+        return true;
     }
 
     public ArrayList<Reserva> getReservas() throws SQLException {
@@ -74,4 +110,22 @@ public class ClubDeportivo {
 
         return listaReservas;
     }
+
+    public boolean crearReserva(Reserva reserva) throws SQLException {
+
+        String sql = "{CALL sp_crear_reserva(?, ?, ?, ?, ?, ?)}";
+
+        CallableStatement cst = conexion.prepareCall(sql);
+
+        cst.setString(1, reserva.getIdReserva());
+        cst.setString(2, reserva.getIdSocio());
+        cst.setString(3, reserva.getIdPista());
+        cst.setDate(4, Date.valueOf(reserva.getFecha()));
+        cst.setTime(5, Time.valueOf(reserva.getHoraInicio()));
+        cst.setInt(6, reserva.getDuracionMin());
+
+        cst.execute();
+        return true;
+    }
+
 }
