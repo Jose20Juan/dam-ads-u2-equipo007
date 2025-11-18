@@ -11,8 +11,8 @@ public class ClubDeportivo {
    private Connection conexion;
 
     public ClubDeportivo() throws SQLException {
-        conexion= DriverManager.getConnection("jdbc:mysql://localhost:3306/club_dama",
-                                        "root","alumno");
+        conexion = DriverManager.getConnection("jdbc:mysql://mysql-j20j2.alwaysdata.net:3306/j20j2_club_dama?serverTimezone=UTC",
+                "j20j2", "CholoDiversion");
     }
 
     public ArrayList<Socio> getSocios() {
