@@ -146,4 +146,15 @@ public class ClubDeportivo {
         System.out.println("Se actualizaron " + filasAfectadas + " filas.");
     }
 
+    public boolean cancelarReserva(Reserva reserva) throws SQLException {
+
+        String sql = "DELETE FROM reservas WHERE id_reserva = ?";
+
+        PreparedStatement pst = conexion.prepareStatement(sql);
+        pst.setString(1, reserva.getIdReserva());
+        pst.executeUpdate();
+
+        return true;
+    }
+
 }

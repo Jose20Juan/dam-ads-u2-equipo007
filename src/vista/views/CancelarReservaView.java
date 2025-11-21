@@ -1,26 +1,34 @@
 package vista.views;
-import modelo.*;
-import servicio.ClubDeportivo;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import modelo.*;
+import servicio.ClubDeportivo;
 
-import java.util.function.Consumer;
+import java.sql.SQLException;
 
 public class CancelarReservaView extends GridPane {
     public CancelarReservaView(ClubDeportivo club) {
         setPadding(new Insets(12));
-        setHgap(8); setVgap(8);
+        setHgap(8);
+        setVgap(8);
 
         ComboBox<Reserva> id = new ComboBox();
+        try {
+            id.getItems().addAll(club.getReservas());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         Button cancelar = new Button("Cancelar reserva");
 
-        addRow(0, new Label("Reserva"), id);
+        addRow(0, new Label("modelo.Reserva"), id);
         add(cancelar, 1, 1);
 
         cancelar.setOnAction(e -> {
             try {
-         //      club.cancelarReserva(id.getValue());
+                club.cancelarReserva(id.getValue());
+
+
 
             } catch (Exception ex) {
                 showError(ex.getMessage());
@@ -33,6 +41,7 @@ public class CancelarReservaView extends GridPane {
         a.setHeaderText("Error");
         a.showAndWait();
     }
+
     private void showInfo(String msg) {
         Alert a = new Alert(Alert.AlertType.INFORMATION, msg, ButtonType.OK);
         a.setHeaderText(null);
