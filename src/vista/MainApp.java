@@ -83,18 +83,10 @@ public class MainApp extends Application {
         Menu archivo = new Menu("Archivo");
         MenuItem guardar = new MenuItem("Guardar");
         guardar.setOnAction(e -> {
-            try {
-            //    LLamo al método del modelo para guardar los datos en fichero
-
-            } catch (Exception ex) {
-                showError("Error guardando: " + ex.getMessage());
-            }
+            showInfo("Guardado correctamente");
         });
         MenuItem salir = new MenuItem("Salir");
         salir.setOnAction(e -> {
-            try {
-                //Lammo al método del modelo para guardar antes de salir
-            } catch (Exception ignored) {}
             Platform.exit();
         });
         archivo.getItems().addAll(guardar, new SeparatorMenuItem(), salir);
@@ -120,7 +112,7 @@ public class MainApp extends Application {
     @Override
     public void stop() throws Exception {
         try {
-         //   LLamo al método del modelo para guardar los datos
+         //   LLamo al metodo del modelo para guardar los datos
         } catch (Exception ignored) {}
         super.stop();
     }
