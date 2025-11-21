@@ -1,26 +1,39 @@
 package vista.views;
 
-import servicio.ClubDeportivo;
-import modelo.*;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import modelo.*;
+import servicio.ClubDeportivo;
 
-import java.util.function.Consumer;
+import java.sql.SQLException;
 
 public class BajaSocioView extends GridPane {
     public BajaSocioView(ClubDeportivo club) {
         setPadding(new Insets(12));
         setHgap(8); setVgap(8);
 
-        ComboBox<Socio> id = new ComboBox<>();
+        ComboBox<Socio> id2 = new ComboBox<>();
         Button baja = new Button("Dar de baja");
 
-        addRow(0, new Label("Socio"), id);
+        addRow(0, new Label("modelo.Socio"), id2);
         add(baja, 1, 1);
+        try {
+            id2.getItems().addAll(club.getSocios());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         baja.setOnAction(e -> {
-        //LLamar al método del modelo para dar de baja  a un socio.
+            try {
+                Socio socio = id2.getValue();
+                boolean ok=true;
+                ok= club.bajasocio(socio);
+                if (ok) showInfo("Socio Borrado correctametne");
+                else showError("Socio no Borrado correctamente");
+            } catch (Exception ex) {
+                showError(ex.getMessage());
+            }
         });
     }
 
@@ -35,3 +48,4 @@ public class BajaSocioView extends GridPane {
         a.showAndWait();
     }
 }
+

@@ -53,6 +53,18 @@ public class ClubDeportivo {
         return true;
     }
 
+    public boolean bajasocio(Socio socio) throws SQLException {
+
+        String sql = "DELETE FROM socios WHERE id_socio = ?";
+
+        PreparedStatement pst = conexion.prepareStatement(sql);
+
+        pst.setString(1, socio.getIdSocio());
+
+        int filas = pst.executeUpdate();
+        return filas > 0;
+    }
+
     public ArrayList<Pista> getPistas() throws SQLException {
 
         ArrayList<Pista> listaPistas = new ArrayList<>();
