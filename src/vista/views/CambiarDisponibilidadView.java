@@ -36,6 +36,8 @@ public class CambiarDisponibilidadView extends GridPane {
 
                 club.cambiarDisponibilidad(pistaSeleccionada.getIdPista(), disponible.isSelected());
 
+                showInfo("Disponibilidad actualizada correctamente");
+
             } catch (Exception ex) {
                 showError(ex.getMessage());
             }

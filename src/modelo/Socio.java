@@ -22,6 +22,10 @@ public class Socio {
         this.email = email;
     }
 
+    public String toString() {
+        return nombre + " " + apellidos;
+    }
+
     public String getIdSocio() {
         return idSocio;
     }
@@ -65,4 +69,5 @@ public class Socio {
     public void setEmail(String email) {
         this.email = email;
     }
+
 }
