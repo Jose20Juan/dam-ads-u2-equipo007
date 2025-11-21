@@ -128,4 +128,22 @@ public class ClubDeportivo {
         return true;
     }
 
+    public void cambiarDisponibilidad(String nombrePista, boolean disponible) throws SQLException {
+        String sql = "UPDATE pistas SET disponible = ? WHERE id_pista = ?";
+
+        PreparedStatement pst = conexion.prepareStatement(sql);
+
+        pst.setBoolean(1, disponible);
+
+
+        pst.setString(2, nombrePista);
+
+        int filasAfectadas = pst.executeUpdate();
+
+
+        pst.close();
+
+        System.out.println("Se actualizaron " + filasAfectadas + " filas.");
+    }
+
 }
