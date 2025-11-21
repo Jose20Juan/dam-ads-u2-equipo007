@@ -83,10 +83,7 @@ public class MainApp extends Application {
         Menu archivo = new Menu("Archivo");
         MenuItem guardar = new MenuItem("Guardar");
         guardar.setOnAction(e -> {
-            showInfo("Guardado correctamente");
-        });
-        MenuItem salir = new MenuItem("Salir");
-        salir.setOnAction(e -> {
+
             Platform.exit();
         });
         archivo.getItems().addAll(guardar, new SeparatorMenuItem(), salir);
