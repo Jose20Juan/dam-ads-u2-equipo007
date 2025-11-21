@@ -59,7 +59,13 @@ public class MainApp extends Application {
         MenuItem altaPista = new MenuItem("Alta pista");
         altaPista.setOnAction(e -> root.setCenter(new PistaFormView(club)));
         MenuItem cambiarDisp = new MenuItem("Cambiar disponibilidad");
-        cambiarDisp.setOnAction(e -> root.setCenter(new CambiarDisponibilidadView(club)));
+        cambiarDisp.setOnAction(e -> {
+            try {
+                root.setCenter(new CambiarDisponibilidadView(club));
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         pistas.getItems().addAll(altaPista, cambiarDisp);
 
         Menu reservas = new Menu("Reservas");
