@@ -21,17 +21,15 @@ public class CancelarReservaView extends GridPane {
         }
         Button cancelar = new Button("Cancelar reserva");
 
-        addRow(0, new Label("modelo.Reserva"), id);
+        addRow(0, new Label("Reserva"), id);
         add(cancelar, 1, 1);
 
         cancelar.setOnAction(e -> {
             try {
                 club.cancelarReserva(id.getValue());
 
-
-
             } catch (Exception ex) {
-                showError(ex.getMessage());
+                showError("No se pudo cancelar la reserva");
             }
         });
     }

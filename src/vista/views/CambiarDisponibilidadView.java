@@ -39,7 +39,7 @@ public class CambiarDisponibilidadView extends GridPane {
                 showInfo("Disponibilidad actualizada correctamente");
 
             } catch (Exception ex) {
-                showError(ex.getMessage());
+                showError("No se pudo actualizar la disponibilidad");
             }
         });
     }

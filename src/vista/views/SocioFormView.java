@@ -37,7 +37,7 @@ public class SocioFormView extends GridPane {
                 if (ok) showInfo("Socio insertado correctametne");
                 else showError("Socio no inertado correctamente");
             } catch (Exception ex) {
-                showError(ex.getMessage());
+                showError("No se pudo insertar el socio");
             }
         });
     }

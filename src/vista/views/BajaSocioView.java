@@ -16,7 +16,7 @@ public class BajaSocioView extends GridPane {
         ComboBox<Socio> id2 = new ComboBox<>();
         Button baja = new Button("Dar de baja");
 
-        addRow(0, new Label("modelo.Socio"), id2);
+        addRow(0, new Label("Socio"), id2);
         add(baja, 1, 1);
         try {
             id2.getItems().addAll(club.getSocios());
