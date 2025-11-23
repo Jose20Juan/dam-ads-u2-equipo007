@@ -61,8 +61,9 @@ public class ClubDeportivo {
 
         pst.setString(1, socio.getIdSocio());
 
-        int filas = pst.executeUpdate();
-        return filas > 0;
+        pst.executeUpdate();
+
+        return true;
     }
 
     public ArrayList<Pista> getPistas() throws SQLException {
