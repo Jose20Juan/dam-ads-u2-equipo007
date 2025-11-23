@@ -30,9 +30,8 @@ public class BajaSocioView extends GridPane {
                 boolean ok=true;
                 ok= club.bajasocio(socio);
                 if (ok) showInfo("Socio Borrado correctametne");
-                else showError("Socio no Borrado correctamente");
             } catch (Exception ex) {
-                showError(ex.getMessage());
+                showError("Socio no Borrado correctamente");
             }
         });
     }
